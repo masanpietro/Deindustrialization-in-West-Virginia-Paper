@@ -1,0 +1,33 @@
+---
+title: "Midterm Paper"
+author: "Michael San Pietro"
+date: "2025-10-15"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+library('stargazer')
+```
+
+
+```{r}
+library('tidyverse')
+library('stargazer')
+library('readxl')
+```
+
+
+```{r}
+EDUCdata <- read_xlsx("C:/Users/masan/OneDrive/Desktop/Midterm EconGEO/EducationRates.xlsx")
+colnames(EDUCdata)[colnames(EDUCdata) == '2024'] <- 'EducRate(2024)'
+colnames(EDUCdata)[colnames(EDUCdata) == 'GrowthRate'] <- 'GrowthRate(2013-2024)'
+regress1 <- lm(EDUCdata$'EducRate(2024)' ~ HistoricalCoal, data=EDUCdata)
+regress2 <-lm(EDUCdata$'GrowthRate(2013-2024)' ~ HistoricalCoal, data=EDUCdata)
+stargazer(regress1, regress2, type=".png", out="regression_table.png")
+```
